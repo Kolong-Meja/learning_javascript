@@ -399,3 +399,51 @@ function experimentNumberFive() {
         }
     }
 }
+
+// create a class
+class User {
+    constructor(name, age, email, password) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+        this.password = password;
+    }
+
+    // create method
+    showUserData() {
+        const userDataObject = {
+            id: 1,
+            name: this.name,
+            age: this.age,
+            email: this.email,
+            password: this.password,
+        };
+        return userDataObject;
+    }
+
+    messageForAdmin() {
+        return (this.id > 1) ? "Welcome User" : `Welcome Abort Admin ${this.name}`;
+    }
+
+    anotherMessageForAdmin() {
+        return (this.age > 18) ? "You are to old" : "You are to young";
+    }
+
+    encryptPassword() {
+        let password = this.password.split(" ");
+        let newPassword = [];
+        for (let i = 0; i < password.length; i++) {
+            let character = password[i].split("");
+            let newCharacter = character.map(char => "*");
+            newPassword.push(newCharacter.join(""));
+        }
+        const newUserObject = Object.assign({}, this.showUserData());
+        newUserObject["password"] = newPassword.join(" ");
+        return JSON.stringify(newUserObject, null, 4);         
+    }
+}
+let user = new User("Faisal Ramadhan", 21, "faisal12@gmail.com", "faisal12#");
+console.log(user.showUserData());
+console.log(user.messageForAdmin());
+console.log(user.anotherMessageForAdmin());
+console.log(user.encryptPassword());
