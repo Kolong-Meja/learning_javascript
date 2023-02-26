@@ -439,11 +439,13 @@ class User {
         }
         const newUserObject = Object.assign({}, this.showUserData());
         newUserObject["password"] = newPassword.join(" ");
-        return JSON.stringify(newUserObject, null, 4);         
+        return newUserObject;     
+    }
+
+    userLogin() {
+        if (this.email != "faisal12@gmail.com" || this.password != "faisal12#") {
+            throw new Error("Wrong Email or Password");
+        }
+        return `Welcome abort ${this.name}\nData: ${JSON.stringify(this.encryptPassword(), null, 4)}`;
     }
 }
-let user = new User("Faisal Ramadhan", 21, "faisal12@gmail.com", "faisal12#");
-console.log(user.showUserData());
-console.log(user.messageForAdmin());
-console.log(user.anotherMessageForAdmin());
-console.log(user.encryptPassword());
